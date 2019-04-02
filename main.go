@@ -8,66 +8,13 @@ import (
 	"os"
 	"path/filepath"
 	"time"
-
-	"github.com/urfave/cli"
 )
 
 const commitMsgFileName = "COMMIT_EDITMSG"
 
-func main() {
-	app := cli.NewApp()
-
-	app.Name = "git-zoo"
-	app.Usage = "add animals emoji to git commit message."
-	app.Version = "0.1.0"
-
-	app.Action = func(c *cli.Context) error {
-		filePath := c.Args().Get(0)
-		fileName := filepath.Base(filePath)
-
-		if c.NArg() == 0 || fileName != commitMsgFileName {
-			return cli.NewExitError("Requires an argument that is path to COMMIT_EDITMSG", 1)
-		}
-
-		// read commit message
-		fp, err := os.Open(filePath)
-		if err != nil {
-			panic(err)
-		}
-		scanner := bufio.NewScanner(fp)
-
-		// add emoji to commit message
-		commitMsg := animals() + " "
-		for scanner.Scan() {
-			commitMsg = commitMsg + scanner.Text() + "\n"
-		}
-		fmt.Println(commitMsg)
-		fp.Close()
-
-		// write commit message
-		fp, err = os.Create(filePath)
-		if err != nil {
-			log.Fatal(err)
-			os.Exit(1)
-		}
-		defer fp.Close()
-		writer := bufio.NewWriter(fp)
-
-		_, err = writer.WriteString(commitMsg)
-		if err != nil {
-			log.Fatal(err)
-			os.Exit(1)
-		}
-		writer.Flush()
-		fp.Close()
-
-		return nil
-	}
-
-	err := app.Run(os.Args)
-	if err != nil {
-		log.Fatal(err)
-	}
+func showUsage() {
+	fmt.Fprintln(os.Stderr, "Usage: git-zoo <COMMIT_EDITMSG_FILE>")
+	os.Exit(1)
 }
 
 func animals() string {
@@ -106,4 +53,64 @@ func animals() string {
 		return "🐵"
 	}
 	return ""
+}
+
+func getEditedCommitMessage(filePath string) (string, error) {
+	commitMsg := animals() + " "
+
+	fp, err := os.Open(filePath)
+	if err != nil {
+		return "", err
+	}
+	scanner := bufio.NewScanner(fp)
+
+	for scanner.Scan() {
+		commitMsg = commitMsg + scanner.Text() + "\n"
+	}
+	fp.Close()
+
+	return commitMsg, nil
+}
+
+func writeCommitMessage(filePath string, msg string) error {
+	fp, err := os.Create(filePath)
+	if err != nil {
+		return err
+	}
+	defer fp.Close()
+	writer := bufio.NewWriter(fp)
+
+	_, err = writer.WriteString(msg)
+	if err != nil {
+		return err
+	}
+	writer.Flush()
+	fp.Close()
+
+	return nil
+}
+
+func main() {
+	if len(os.Args) == 0 {
+		showUsage()
+		os.Exit(1)
+	}
+
+	filePath := os.Args[1]
+	fileName := filepath.Base(filePath)
+	if fileName != commitMsgFileName {
+		showUsage()
+		os.Exit(1)
+	}
+
+	commitMsg, err := getEditedCommitMessage(filePath)
+	if err != nil {
+		log.Fatal(err)
+		os.Exit(1)
+	}
+	err = writeCommitMessage(filePath, commitMsg)
+	if err != nil {
+		log.Fatal(err)
+		os.Exit(1)
+	}
 }
