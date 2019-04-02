@@ -1,7 +1,7 @@
 git-zoo
 ===
 
-This tool adds animals emoji in git commit message. Let's make commit log a zoo.
+This tool adds the emoji of animals in your git commit message. Let's make commit log a zoo.
 
 ## Feature
 - Supports both `git commit` and `git commit -m` commands.
@@ -21,7 +21,7 @@ Then, Make symbolic link of githook in your git repository.
 $ ln -s $GOPATH/bin/git-zoo {your git repository}/.git/hooks/prepare-commit-msg
 ```
 
-Alternatively, If you already make `prepare-commit-msg`, you can append command in as below.
+Alternatively, If you already make `prepare-commit-msg`, you can append command as follows.
 
 ```
 #!/bin/sh
