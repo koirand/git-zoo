@@ -2,7 +2,6 @@ package main
 
 import (
 	"bufio"
-	"fmt"
 	"log"
 	"math/rand"
 	"os"
@@ -12,9 +11,8 @@ import (
 
 const commitMsgFileName = "COMMIT_EDITMSG"
 
-func showUsage() {
-	fmt.Fprintln(os.Stderr, "Usage: git-zoo <COMMIT_EDITMSG_FILE>")
-	os.Exit(1)
+func showUsageAndExit() {
+	log.Fatal("Usage: git-zoo <COMMIT_EDITMSG_FILE>")
 }
 
 func animals() string {
@@ -91,26 +89,22 @@ func writeCommitMessage(filePath string, msg string) error {
 }
 
 func main() {
-	if len(os.Args) == 0 {
-		showUsage()
-		os.Exit(1)
+	if len(os.Args) <= 1 {
+		showUsageAndExit()
 	}
 
 	filePath := os.Args[1]
 	fileName := filepath.Base(filePath)
 	if fileName != commitMsgFileName {
-		showUsage()
-		os.Exit(1)
+		showUsageAndExit()
 	}
 
 	commitMsg, err := getEditedCommitMessage(filePath)
 	if err != nil {
 		log.Fatal(err)
-		os.Exit(1)
 	}
 	err = writeCommitMessage(filePath, commitMsg)
 	if err != nil {
 		log.Fatal(err)
-		os.Exit(1)
 	}
 }
