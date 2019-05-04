@@ -2,6 +2,7 @@ package main
 
 import (
 	"bufio"
+	"fmt"
 	"log"
 	"math/rand"
 	"os"
@@ -12,7 +13,8 @@ import (
 const commitMsgFileName = "COMMIT_EDITMSG"
 
 func showUsageAndExit() {
-	log.Fatal("Usage: git-zoo <COMMIT_EDITMSG_FILE>")
+	fmt.Fprintf(os.Stderr, "Usage: git-zoo <COMMIT_EDITMSG_FILE>")
+	os.Exit(1)
 }
 
 func animals() string {
