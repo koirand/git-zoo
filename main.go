@@ -13,7 +13,7 @@ import (
 const commitMsgFileName = "COMMIT_EDITMSG"
 
 func showUsageAndExit() {
-	fmt.Fprintf(os.Stderr, "Usage: git-zoo <COMMIT_EDITMSG_FILE>")
+	fmt.Fprintln(os.Stderr, "Usage: git-zoo <COMMIT_EDITMSG_FILE>")
 	os.Exit(1)
 }
 
