@@ -7,7 +7,7 @@ This tool adds the emoji of animals in your git commit message. Let's make commi
 - Supports both `git commit` and `git commit -m` commands.
 - Works with IDEs such as VSCode and Atom.
 
-## Usage
+## Install
 
 The binary has not been distributed yet. Install with `go get` command.
 
@@ -15,7 +15,8 @@ The binary has not been distributed yet. Install with `go get` command.
 $ go get github.com/koirand/git-zoo
 ```
 
-Then, Make symbolic link of githook in your git repository.
+## Usage
+Make symbolic link of githook in your git repository, or run `git-zoo enable` command.
 
 ```bash
 $ ln -s $GOPATH/bin/git-zoo {your git repository}/.git/hooks/prepare-commit-msg
