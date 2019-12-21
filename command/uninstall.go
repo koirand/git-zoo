@@ -8,23 +8,23 @@ import (
 	"github.com/mitchellh/cli"
 )
 
-type DisableCommand struct {
+type UninstallCommand struct {
 	Ui cli.Ui
 }
 
-func NewDisableCommand() (cli.Command, error) {
-	return new(DisableCommand), nil
+func NewUninstallCommand() (cli.Command, error) {
+	return new(UninstallCommand), nil
 }
 
-func (e *DisableCommand) Help() string {
-	return "git-zoo disable"
+func (e *UninstallCommand) Help() string {
+	return "git-zoo uninstall"
 }
 
-func (e *DisableCommand) Synopsis() string {
-	return "Disable git-zoo in current git repository"
+func (e *UninstallCommand) Synopsis() string {
+	return "Uninstall git-zoo from current git repository"
 }
 
-func (e *DisableCommand) Run(args []string) int {
+func (e *UninstallCommand) Run(args []string) int {
 	gitRootDir, err := tools.GetGitRootDir()
 	if err != nil {
 		fmt.Println(err)

@@ -9,23 +9,23 @@ import (
 	"github.com/mitchellh/cli"
 )
 
-type EnableCommand struct {
+type InstallCommand struct {
 	Ui cli.Ui
 }
 
-func NewEnableCommand() (cli.Command, error) {
-	return new(EnableCommand), nil
+func NewInstallCommand() (cli.Command, error) {
+	return new(InstallCommand), nil
 }
 
-func (e *EnableCommand) Help() string {
-	return "git-zoo enable"
+func (e *InstallCommand) Help() string {
+	return "git-zoo install"
 }
 
-func (e *EnableCommand) Synopsis() string {
-	return "Enable git-zoo in current git repository"
+func (e *InstallCommand) Synopsis() string {
+	return "Install git-zoo to current git repository"
 }
 
-func (e *EnableCommand) Run(args []string) int {
+func (e *InstallCommand) Run(args []string) int {
 	gitRootDir, err := tools.GetGitRootDir()
 	if err != nil {
 		fmt.Println(err)

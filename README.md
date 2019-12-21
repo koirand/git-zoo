@@ -16,13 +16,8 @@ $ go get github.com/koirand/git-zoo
 ```
 
 ## Usage
-Make symbolic link of githook in your git repository, or run `git-zoo enable` command.
-
-```bash
-$ ln -s $GOPATH/bin/git-zoo {your git repository}/.git/hooks/prepare-commit-msg
-```
-
-Alternatively, If you already make `prepare-commit-msg`, you can append command as follows.
+Execute `git-zoo install` on your git repository. This will create a git hook symbolic link in `.git/hooks/prepare-commit-msg`.
+If you have already created git hooks, you can add the command as follows:
 
 ```
 #!/bin/sh

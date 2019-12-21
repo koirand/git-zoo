@@ -25,11 +25,11 @@ func main() {
 	c.Args = os.Args[1:]
 	ui := command.NewUI()
 	c.Commands = map[string]cli.CommandFactory{
-		"enable": func() (cli.Command, error) {
-			return &command.EnableCommand{Ui: ui}, nil
+		"install": func() (cli.Command, error) {
+			return &command.InstallCommand{Ui: ui}, nil
 		},
-		"disable": func() (cli.Command, error) {
-			return &command.DisableCommand{Ui: ui}, nil
+		"uninstall": func() (cli.Command, error) {
+			return &command.UninstallCommand{Ui: ui}, nil
 		},
 	}
 
