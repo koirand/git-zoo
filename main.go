@@ -13,7 +13,13 @@ import (
 )
 
 func main() {
-	if len(os.Args) == 2 && filepath.Base(os.Args[1]) == "COMMIT_EDITMSG" {
+	if len(os.Args) > 1 && filepath.Base(os.Args[1]) == "COMMIT_EDITMSG" {
+		// When -c, -C, or -amend are used as git commit options,
+		// Do not change the commit message.
+		if len(os.Args) > 2 && os.Args[2] == "commit" {
+			os.Exit(0)
+		}
+
 		if err := edit(os.Args[1]); err != nil {
 			fmt.Println(err)
 			os.Exit(1)
