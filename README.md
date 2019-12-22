@@ -3,11 +3,11 @@ git-zoo
 
 🐶🐱🐭🐹🐰🦊🐻🐼🐨🐯🦁🐮🐷🐸🐵
 
-This tool adds the emoji of animals in your git commit message. Let's make commit log a zoo.
+This tool adds random animal emoji to git commit message. Let's make commit log a zoo.
 
 ## Feature
 - Supports both `git commit` and `git commit -m` commands.
-- Works with IDEs such as VSCode and Atom.
+- It works also with IDEs such as VSCode and Atom.
 
 ## Install
 
@@ -18,7 +18,8 @@ $ go get github.com/koirand/git-zoo
 ```
 
 ## Usage
-Execute `git zoo install` on your git repository. This will create a git hook symbolic link in `.git/hooks/prepare-commit-msg`.
+Execute `git zoo` command on your git repository. It will create a git hook symbolic link in `.git/hooks/prepare-commit-msg`. When you commit, you see that the commit message is automatically edited.
+
 If you have already created git hooks, you can add the command as follows:
 
 ```
@@ -26,10 +27,15 @@ If you have already created git hooks, you can add the command as follows:
 
 ...
 
-git-zoo $1
+git zoo $1
 ```
 
-## Example
+To disable git hook, unlink symbolic link.
+```
+unlink .git/hooks/prepare-commit-msg
+```
+
+## Git log example
 
 ```bash
 $ echo "foo" >> README.md
