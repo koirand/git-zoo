@@ -1,6 +1,8 @@
 git-zoo
 ===
 
+🐶🐱🐭🐹🐰🦊🐻🐼🐨🐯🦁🐮🐷🐸🐵
+
 This tool adds the emoji of animals in your git commit message. Let's make commit log a zoo.
 
 ## Feature
@@ -16,7 +18,7 @@ $ go get github.com/koirand/git-zoo
 ```
 
 ## Usage
-Execute `git-zoo install` on your git repository. This will create a git hook symbolic link in `.git/hooks/prepare-commit-msg`.
+Execute `git zoo install` on your git repository. This will create a git hook symbolic link in `.git/hooks/prepare-commit-msg`.
 If you have already created git hooks, you can add the command as follows:
 
 ```
