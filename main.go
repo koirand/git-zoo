@@ -3,13 +3,12 @@ package main
 import (
 	"fmt"
 	"os"
-	"path/filepath"
 
 	"github.com/koirand/git-zoo/zoo"
 )
 
 func main() {
-	if len(os.Args) > 1 && filepath.Base(os.Args[1]) == "COMMIT_EDITMSG" {
+	if len(os.Args) > 1 {
 		// When -c, -C, or -amend are used as git commit options, do nothing
 		if len(os.Args) > 2 && os.Args[2] == "commit" {
 			os.Exit(0)
