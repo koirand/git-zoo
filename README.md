@@ -11,7 +11,9 @@ This tool adds random animal emoji to git commit message. Let's make commit log 
 
 ## Install
 
-The binary has not been distributed yet. Install with `go get` command.
+Download the binary from the [Releases page](https://github.com/koirand/git-zoo/releases).
+
+Or Install with `go get` command.
 
 ```bash
 $ go get github.com/koirand/git-zoo
